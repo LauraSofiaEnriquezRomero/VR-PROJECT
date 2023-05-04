@@ -26,6 +26,11 @@ public class TCPScript : MonoBehaviour {
         leerDatosProcessing ();
 
         transform.position = new Vector3(tcpX-200,tcpY-200,0);
+
+        /*if(tcpX < 200 && tcpY < 200){
+                Debug.Log("yea");
+            }
+        }*/
     }
 
 

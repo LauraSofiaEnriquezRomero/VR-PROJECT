@@ -30,7 +30,7 @@ float semejanzaEnColor = 45;
 float minimoDePixelesSemejantes = 50;
 
 String ip = "190.99.197.16"; // Cambia esto con la dirección IP de tu dispositivo
-int port = 12345; // Puerto de comunicación
+int port = 12000; // Puerto de comunicación
 
 OscP5 oscP5;
 NetAddress remoteLocation;
@@ -67,7 +67,7 @@ void setup()
     
     // Configura la comunicación OSC
     oscP5 = new OscP5(this, 5204);
-    remoteLocation = new NetAddress("190.99.199.137", 5204); 
+    remoteLocation = new NetAddress("190.99.198.250", 5204); 
     // Coloca aquí la dirección IP de tu celular
 
 }
