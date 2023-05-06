@@ -1,36 +1,56 @@
+/**
+* Permite integrar processing con Unity, para leer un marcador y mover
+* un objeto.
+*/
 using UnityEngine;
 using System.Collections;
 using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Threading;
 
-public class TCPScript : MonoBehaviour {
+public class TCPClient : MonoBehaviour {
 
     internal Boolean socketReady = false;
     TcpClient mySocket;
     NetworkStream theStream;
     StreamReader theReader;
+    // String Host = "11.11.19.43";
     String Host = "localhost";
-    Int32 Port = 5204;
+    // Int32 Port = 80;
+    Int32 Port = 80;
 
     public int tcpX = 0;
     public int tcpY = 0;
 
+    public float factor = 0.3f;
+
+    public Thread mainThread;
+
+    public bool killThread = false;
+
+    
+
     void Start () {
+        mainThread = new Thread(hiloPrincipal);
+        mainThread.Start();
+    }
+
+    void hiloPrincipal() {
         abrirElSocket ();
+        while(!killThread) {
+            leerDatosProcessing ();
+        }
     }
 
     void Update () {
         transform.position = new Vector3(0,0,0);
+        transform.position = new Vector3(tcpX*factor,tcpY*factor,0);
+    }
 
-        leerDatosProcessing ();
-
-        transform.position = new Vector3(tcpX-200,tcpY-200,0);
-
-        /*if(tcpX < 200 && tcpY < 200){
-                Debug.Log("yea");
-            }
-        }*/
+    void OnDestroy() {
+        Debug.Log("Matando el hilo...");
+        this.killThread = true;
     }
 
 
@@ -45,7 +65,7 @@ public class TCPScript : MonoBehaviour {
                 new string[]{","},
                 StringSplitOptions.None
             );
-            Debug.Log ("X=" + partes [0] + " Y=" + partes [1]);
+            // Debug.Log ("X=" + partes [0] + " Y=" + partes [1]);
             tcpX = Int32.Parse (partes [0]);
             tcpY = Int32.Parse (partes [1]);
         }

@@ -1,14 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 
 public class SceneManager : MonoBehaviour
 {
-    void Start() {
-        Invoke("LoadScene", 2f); // Llama al método CargarEscena después de 5 segundos
-    }
 
-    public void ChangeScene(string Level_1)
+    public void ChangeScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
