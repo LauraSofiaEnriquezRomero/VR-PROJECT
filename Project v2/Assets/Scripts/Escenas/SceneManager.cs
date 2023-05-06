@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class SceneManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        Invoke("LoadScene", 2f); // Llama al método CargarEscena después de 5 segundos
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeScene(string Level_1)
     {
-        
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }
+
