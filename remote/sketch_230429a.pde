@@ -6,8 +6,6 @@
 import processing.video.*;
 import processing.serial.*;
 import processing.net.*;
-import netP5.*;
-import oscP5.*;
 
 
 //Instancio la variable para capturar la camara
@@ -17,25 +15,13 @@ String datosPosiciones = "";//Guarda la informacion que se enviara por el puerto
 
 // Instancio la variable del color que se va a buscar
 color marcadorA;
-color marcadorB;
 
 int xMarcadorA = 0;
 int yMarcadorA = 0;
 
-int xMarcadorB = 0;
-int yMarcadorB = 0;
-
 // Distancia de semejanza en color
 float semejanzaEnColor = 45;
 float minimoDePixelesSemejantes = 50;
-
-String ip = "190.99.197.16"; // Cambia esto con la dirección IP de tu dispositivo
-int port = 12000; // Puerto de comunicación
-
-OscP5 oscP5;
-NetAddress remoteLocation;
-float x, y;
-
 
 void settings() {
     // creo la ventana
@@ -44,18 +30,8 @@ void settings() {
 
 void setup()
 {
-  /*  // Inicializar la librería Ketai
-    sensor = new KetaiSensor(this);
-    cam = new KetaiCamera(this, width, height, 30);
-    cam.start();
-  */
-    // Iniciar servidor en el puerto 5204
-    servidor = new Server(this, 5204);
-
-    // Habilitar solo para depurar el driver de la camara en caso de problemas detectando la camara
-    //String[] cameras = Capture.list();
-    //printArray(cameras);
-    //camara = new Capture(this, cameras[3]);
+    // Iniciar servidor en el puerto 80
+    servidor = new Server(this, 80);
 
     //En la variable video almaceno la camra
     camara = new Capture(this, width, height, 30);
@@ -63,19 +39,10 @@ void setup()
 
     // Marcadores
     marcadorA = color(154.0,174.0,58.0); // Color real del marcador A.
-    marcadorB = color(255,60,79); // Color real del marcador B.
-    
-    // Configura la comunicación OSC
-    oscP5 = new OscP5(this, 5204);
-    remoteLocation = new NetAddress("190.99.198.250", 5204); 
-    // Coloca aquí la dirección IP de tu celular
-
 }
 
 void draw()
-{
-
-    
+{   
     //background(255);
     // Dibuja un círculo en la posición enviada por el celular
     //ellipse(mouseX, mouseY, 50, 50);
@@ -87,29 +54,26 @@ void draw()
         image(camara, 0, 0);
         camara.loadPixels();
         
-        /*rect (0,0,213,160);//VERDE CENTRO
         fill(255, 0, 0, 150);
+        rect (0,0,213,160);//ROJO 
         
-        rect (213,160,213,160);//NARANJA
         fill(255, 150, 0, 150);
+        rect (213,160,213,160);//NARANJA
         
-        rect (426,320,213,160);//AZUL 
         fill(0, 110, 255, 150);
+        rect (426,320,213,160);//AZUL 
         
-        rect (0,320,213,160);//cuadrado iz down
         fill(110, 180, 0, 150);
+        rect (0,320,213,160);//VERDE
         
-        rect (426,0,213,160);//cuadrado der down
-        fill(0, 0, 250, 50);*/
+        fill(150, 0, 250, 50);
+        rect (426,0,213,160);//MORADO
+        
 
         float promedioXMarcadorA = 0;
         float promedioYMarcadorA = 0;
 
-        float promedioXMarcadorB = 0;
-        float promedioYMarcadorB = 0;
-
         int cantidadPixelesCoincidenConMarcadorA = 0;
-        int cantidadPixelesCoincidenConMarcadorB = 0;
                        
         //empieza a recorrer cada pixel
         for ( int x = 0; x < camara.width; x++ )
@@ -136,22 +100,6 @@ void draw()
                     promedioXMarcadorA += x;
                     promedioYMarcadorA += y;
                     cantidadPixelesCoincidenConMarcadorA++;
-                } else {
-
-                    float cantidadRojoDelMarcadorB = red(marcadorB);
-                    float cantidadVerdeDelMarcadorB = green(marcadorB);
-                    float cantidadAzulDelMarcadorB = blue(marcadorB);
-
-                    float similitudEnDistanciaDelColorMarcadorB = dist(cantidadRojoDelPixelActual, cantidadVerdeDelPixelActual, cantidadAzulDelPixelActual, cantidadRojoDelMarcadorB, cantidadVerdeDelMarcadorB, cantidadAzulDelMarcadorB); // We are using the dist( ) function to compare the current color with the color we are tracking.
-
-                    // Esta muy cerca del verde
-                    if (similitudEnDistanciaDelColorMarcadorB < semejanzaEnColor)
-                    {
-                    promedioXMarcadorB += x;
-                    promedioYMarcadorB += y;
-                    cantidadPixelesCoincidenConMarcadorB++;
-                    }
-
                 }
             }
         }
@@ -162,17 +110,14 @@ void draw()
             yMarcadorA = (int) promedioYMarcadorA / cantidadPixelesCoincidenConMarcadorA;
         }
 
-        if ( cantidadPixelesCoincidenConMarcadorB > minimoDePixelesSemejantes )
-        {
-            xMarcadorB = (int) promedioXMarcadorB / cantidadPixelesCoincidenConMarcadorB;
-            yMarcadorB = (int) promedioYMarcadorB / cantidadPixelesCoincidenConMarcadorB;
-        }
+
 
         dibujarCentroide(marcadorA, xMarcadorA, yMarcadorA);
-        //dibujarCentroide(marcadorB, xMarcadorB, yMarcadorB);
+        
+        int cuadro = enQueCuadroEsta(xMarcadorA, yMarcadorA);
 
-        if (xMarcadorA > 0 || yMarcadorA > 0 || xMarcadorB > 0 || yMarcadorB > 0) {
-            datosPosiciones = (width-xMarcadorA)+","+(height-yMarcadorA)+","+(width-xMarcadorB)+","+(height-yMarcadorB)+"\n";
+        if (xMarcadorA > 0 || yMarcadorA > 0 ) {
+            datosPosiciones = xMarcadorA + "," + yMarcadorA + "," + cuadro + "\n";
         } else {
             datosPosiciones = "0,0,0,0\n";
         }
@@ -191,7 +136,49 @@ void dibujarCentroide (color marcador, int xMarcador, int yMarcador) {
     strokeWeight(4.0);
     stroke(0);
     ellipse(xMarcador, yMarcador, 16, 16);
+}
+
+
+boolean miFuncion(){
+  return true;
+}
+
+/**
+* Identifica si un x,y esta dentro de un recuadro definido 
+* por la ventana x1,y1 y x2,y2
+*/
+boolean dentroDelCuadro(int xPos,int yPos,int x1, int y1) {
+  if (xPos >= x1 && xPos <= x1 + 213) {
+    // 282,234
+    // 213,160,213,160
+    if (yPos >= y1 && yPos <= y1 + 160) {
+      return true;
+    }
   }
+  return false;
+}
+
+/**
+* Nos dice en que cuadro esta devuelve un numero que representa el cuadro
+*/
+int enQueCuadroEsta(int x,int y){
+  if (dentroDelCuadro(x,y,0,0)){
+    return 1; // ROJO 
+  }
+  if (dentroDelCuadro(x,y,213,160)){
+    return 2; // NARANJA 
+  }
+    if (dentroDelCuadro(x,y,426,320)){
+    return 3; // AZUL 
+  }
+    if (dentroDelCuadro(x,y,0,320)){
+    return 4; // ROJO 
+  }
+    if (dentroDelCuadro(x,y,426,0)){
+    return 5; // ROJO 
+  }
+  return 0;
+}
 
 /**
 * Obtiene el color exacto del pixel donde
@@ -211,11 +198,4 @@ void mousePressed() {
     //marcadorRojo = pixelLeido;
 }
 
-void oscEvent(OscMessage message) {
-  if (message.checkAddrPattern("/posicion")) {
-    float x = message.get(0).floatValue();
-    float y = message.get(1).floatValue();
-    mouseX = int(map(x, 0, 1, 0, width));
-    mouseY = int(map(y, 0, 1, 0, height));
- }
-}
+
