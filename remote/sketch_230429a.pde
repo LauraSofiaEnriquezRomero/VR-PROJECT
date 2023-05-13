@@ -117,7 +117,7 @@ void draw()
         int cuadro = enQueCuadroEsta(xMarcadorA, yMarcadorA);
 
         if (xMarcadorA > 0 || yMarcadorA > 0 ) {
-            datosPosiciones = xMarcadorA + "," + yMarcadorA + "," + cuadro + "\n";
+            datosPosiciones = (width - xMarcadorA) + "," + (height - yMarcadorA) + "," + cuadro + "\n";
         } else {
             datosPosiciones = "0,0,0,0\n";
         }
@@ -197,5 +197,4 @@ void mousePressed() {
     //Habilitar para hacer tracking
     //marcadorRojo = pixelLeido;
 }
-
 
