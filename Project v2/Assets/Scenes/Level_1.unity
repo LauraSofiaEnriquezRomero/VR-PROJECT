@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -816,6 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tcpX: 0
   tcpY: 0
+  cuadro: 0
   factor: 3
   killThread: 0
 --- !u!114 &1586218069
@@ -956,8 +957,9 @@ GameObject:
   - component: {fileID: 2039516231}
   - component: {fileID: 2039516233}
   - component: {fileID: 2039516232}
+  - component: {fileID: 2039516234}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Hechizo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1016,7 +1018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Hechizo:'
 --- !u!222 &2039516233
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1025,3 +1027,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039516230}
   m_CullTransparentMesh: 1
+--- !u!114 &2039516234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039516230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8d81024d0dc2e4b87c70b66055458d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

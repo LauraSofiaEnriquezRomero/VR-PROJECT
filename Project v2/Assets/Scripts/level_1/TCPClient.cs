@@ -15,12 +15,13 @@ public class TCPClient : MonoBehaviour {
     TcpClient mySocket;
     NetworkStream theStream;
     StreamReader theReader;
-    String Host = "11.11.19.43";
-    // String Host = "localhost";
+    //String Host = "11.11.19.43";
+    String Host = "localhost";
     Int32 Port = 80;
 
     public int tcpX = 0;
     public int tcpY = 0;
+    public int cuadro = 0;
 
     public float factor = 0.3f;
 
@@ -62,9 +63,10 @@ public class TCPClient : MonoBehaviour {
                 new string[]{","},
                 StringSplitOptions.None
             );
-            Debug.Log ("X=" + partes [0] + " Y=" + partes [1]);
+            Debug.Log ("X=" + partes [0] + " Y=" + partes [1] + " Cuadro=" + partes[2]);
             tcpX = Int32.Parse (partes [0]);
             tcpY = Int32.Parse (partes [1]);
+            cuadro = Int32.Parse (partes [2]);
         }
     }
 
