@@ -172,10 +172,10 @@ int enQueCuadroEsta(int x,int y){
     return 3; // AZUL 
   }
     if (dentroDelCuadro(x,y,0,320)){
-    return 4; // ROJO 
+    return 4; // VERDE 
   }
     if (dentroDelCuadro(x,y,426,0)){
-    return 5; // ROJO 
+    return 5; // MORADO 
   }
   return 0;
 }
@@ -197,4 +197,3 @@ void mousePressed() {
     //Habilitar para hacer tracking
     //marcadorRojo = pixelLeido;
 }
-

@@ -63,7 +63,7 @@ public class TCPClient : MonoBehaviour {
                 new string[]{","},
                 StringSplitOptions.None
             );
-            Debug.Log ("X=" + partes [0] + " Y=" + partes [1] + " Cuadro=" + partes[2]);
+            // Debug.Log ("X=" + partes [0] + " Y=" + partes [1] + " Cuadro=" + partes[2]);
             tcpX = Int32.Parse (partes [0]);
             tcpY = Int32.Parse (partes [1]);
             cuadro = Int32.Parse (partes [2]);
