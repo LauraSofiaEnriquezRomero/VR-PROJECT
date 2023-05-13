@@ -74,11 +74,7 @@ void setup()
 
 void draw()
 {
-    rect (0,0,213,160);//cuadrado iz up
-    rect (213,160,213,160);//cuadrado centro
-    rect (426,320,213,160);//cuadrado der down
-    rect (0,320,213,160);//cuadrado iz down
-    rect (426,0,213,160);//cuadrado der down
+
     
     //background(255);
     // Dibuja un círculo en la posición enviada por el celular
@@ -90,6 +86,21 @@ void draw()
         camara.read();
         image(camara, 0, 0);
         camara.loadPixels();
+        
+        /*rect (0,0,213,160);//VERDE CENTRO
+        fill(255, 0, 0, 150);
+        
+        rect (213,160,213,160);//NARANJA
+        fill(255, 150, 0, 150);
+        
+        rect (426,320,213,160);//AZUL 
+        fill(0, 110, 255, 150);
+        
+        rect (0,320,213,160);//cuadrado iz down
+        fill(110, 180, 0, 150);
+        
+        rect (426,0,213,160);//cuadrado der down
+        fill(0, 0, 250, 50);*/
 
         float promedioXMarcadorA = 0;
         float promedioYMarcadorA = 0;
@@ -99,7 +110,7 @@ void draw()
 
         int cantidadPixelesCoincidenConMarcadorA = 0;
         int cantidadPixelesCoincidenConMarcadorB = 0;
-
+                       
         //empieza a recorrer cada pixel
         for ( int x = 0; x < camara.width; x++ )
         {
@@ -158,7 +169,7 @@ void draw()
         }
 
         dibujarCentroide(marcadorA, xMarcadorA, yMarcadorA);
-        dibujarCentroide(marcadorB, xMarcadorB, yMarcadorB);
+        //dibujarCentroide(marcadorB, xMarcadorB, yMarcadorB);
 
         if (xMarcadorA > 0 || yMarcadorA > 0 || xMarcadorB > 0 || yMarcadorB > 0) {
             datosPosiciones = (width-xMarcadorA)+","+(height-yMarcadorA)+","+(width-xMarcadorB)+","+(height-yMarcadorB)+"\n";
@@ -168,6 +179,8 @@ void draw()
         //Enviar el dato por el puerto
         servidor.write(datosPosiciones);
     }
+    
+
 }
 
 /**
@@ -178,7 +191,7 @@ void dibujarCentroide (color marcador, int xMarcador, int yMarcador) {
     strokeWeight(4.0);
     stroke(0);
     ellipse(xMarcador, yMarcador, 16, 16);
-}
+  }
 
 /**
 * Obtiene el color exacto del pixel donde

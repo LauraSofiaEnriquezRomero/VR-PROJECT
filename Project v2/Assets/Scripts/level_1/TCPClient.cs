@@ -15,9 +15,8 @@ public class TCPClient : MonoBehaviour {
     TcpClient mySocket;
     NetworkStream theStream;
     StreamReader theReader;
-    // String Host = "11.11.19.43";
-    String Host = "localhost";
-    // Int32 Port = 80;
+    String Host = "11.11.19.43";
+    // String Host = "localhost";
     Int32 Port = 80;
 
     public int tcpX = 0;
@@ -28,8 +27,6 @@ public class TCPClient : MonoBehaviour {
     public Thread mainThread;
 
     public bool killThread = false;
-
-    
 
     void Start () {
         mainThread = new Thread(hiloPrincipal);
@@ -65,7 +62,7 @@ public class TCPClient : MonoBehaviour {
                 new string[]{","},
                 StringSplitOptions.None
             );
-            // Debug.Log ("X=" + partes [0] + " Y=" + partes [1]);
+            Debug.Log ("X=" + partes [0] + " Y=" + partes [1]);
             tcpX = Int32.Parse (partes [0]);
             tcpY = Int32.Parse (partes [1]);
         }
