@@ -38,7 +38,7 @@ void setup()
     camara.start();
 
     // Marcadores
-    marcadorA = color(154.0,174.0,58.0); // Color real del marcador A.
+    marcadorA = color(83.0,132.0,184.0); // Color real del marcador A.
 }
 
 void draw()

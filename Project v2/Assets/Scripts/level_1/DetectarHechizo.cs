@@ -31,10 +31,11 @@ public class DetectarHechizo : MonoBehaviour
     public void patronHechizos() {
         // Estamos ignorando un cuadro ya leido y los cuadro 0
         if (arregloCuadros[idxHechizo] != this.refTCPClient.cuadro && this.refTCPClient.cuadro != 0) {
-            arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
             idxHechizo = idxHechizo + 1;
-
+            arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
+            
             if (idxHechizo > 2){
+                
                 //Puede ser un hechizo de 3.
                 if (idxHechizo > 4) {
                     // Es un hechizo de 5 y ya termninamos.
@@ -52,7 +53,6 @@ public class DetectarHechizo : MonoBehaviour
                     }
                 }
             }
-
         }
     }
 
