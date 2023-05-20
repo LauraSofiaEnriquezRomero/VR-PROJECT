@@ -15,7 +15,7 @@ public class lanzadorRayo : MonoBehaviour
         {
             if (hitInfo.collider.CompareTag("Objetivo"))
             {
-                hitInfo.collider.GetComponent<AumentarTiempo>().OnCollisionEnter(null);
+                hitInfo.collider.GetComponent<aumentaTiempo>().OnCollisionEnter(null);
             }
         }
     }

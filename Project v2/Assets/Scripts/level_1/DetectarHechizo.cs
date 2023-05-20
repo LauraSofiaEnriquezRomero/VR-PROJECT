@@ -14,7 +14,7 @@ public class DetectarHechizo : MonoBehaviour
     public static int[] expelearmus = new int[6] {0,2,4,2,5,1};
 
     // Hechizos de 3
-    public static int[] adacadabra = new int[6] {0,5,1,2,0,0};
+    public static int[] patronus = new int[6] {0,5,1,2,0,0};
 
 
 
@@ -29,7 +29,7 @@ public class DetectarHechizo : MonoBehaviour
 
     void Update()
     {   
-        this.refTex.text = "Hechizo:" + this.refTCPClient.cuadro;
+        this.refTex.text = "Esta en :" + this.refTCPClient.cuadro;
         patronHechizos();
     }
     public void patronHechizos() {
@@ -52,15 +52,15 @@ public class DetectarHechizo : MonoBehaviour
 
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
-                        Debug.Log("Es un expelearmus");
+                        Debug.Log("Es un patronus");
                         
                     }
                     // idxHechizo = 0;
                 }else {
                     // Es un hechizo de 3
-                    if (sonHechizosIguales(arregloCuadros, adacadabra)){
+                    if (sonHechizosIguales(arregloCuadros, patronus)){
                         // Es un expelearmus
-                        Debug.Log("Es un adacadrab");
+                        Debug.Log("Es un adacadra");
                         // idxHechizo = 0;
                     }
                 }
