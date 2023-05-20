@@ -38,6 +38,7 @@ public void patronHechizos() {
 
         // Estamos ignorando un cuadro ya leido y los cuadro 0
         if (arregloCuadros[idxHechizo] != this.refTCPClient.cuadro && this.refTCPClient.cuadro != 0) {
+<<<<<<< HEAD
             arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
             
 
@@ -68,9 +69,13 @@ public void patronHechizos() {
         // Estamos ignorando un cuadro ya leido y los cuadro 0
         if (arregloCuadros[idxHechizo] != this.refTCPClient.cuadro && this.refTCPClient.cuadro != 0) {
             //arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
+=======
+>>>>>>> 32ea5759081dc39a0226725aa99e400e5ffa7077
             idxHechizo = idxHechizo + 1;
-
+            arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
+            
             if (idxHechizo > 2){
+                
                 //Puede ser un hechizo de 3.
                 if (idxHechizo > 4) {
                     // Es un hechizo de 5 y ya termninamos.
