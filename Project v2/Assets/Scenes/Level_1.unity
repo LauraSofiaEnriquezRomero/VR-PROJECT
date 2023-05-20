@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
-=======
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
->>>>>>> 32ea5759081dc39a0226725aa99e400e5ffa7077
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1127,13 +1123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: -247.56549, y: 162.82529}
-  m_SizeDelta: {x: 144.8726, y: 34.3571}
-=======
-  m_AnchoredPosition: {x: -564.71765, y: 461.62}
-  m_SizeDelta: {x: 790.5684, y: 156.7677}
->>>>>>> 32ea5759081dc39a0226725aa99e400e5ffa7077
+  m_AnchoredPosition: {x: -41.795, y: 135.28}
+  m_SizeDelta: {x: 556.4106, y: 89.4473}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2039516232
 MonoBehaviour:
@@ -1189,4 +1180,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8d81024d0dc2e4b87c70b66055458d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arregloCuadros: 0000000000000000000000000000000000000000
+  arregloCuadros: 000000000000000000000000000000000000000000000000
