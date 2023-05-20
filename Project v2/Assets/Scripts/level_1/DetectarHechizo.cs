@@ -41,27 +41,30 @@ public class DetectarHechizo : MonoBehaviour
             idxHechizo++;
             arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
             
-            if (idxHechizo > 2){
+            if (idxHechizo > 3){
                 
                 //Puede ser un hechizo de 3.
-                if (idxHechizo > 4) {
+                if (idxHechizo > 5) {
                     // Es un hechizo de 5 y ya termninamos.
                     Debug.Log("El arregloCuadros está lleno");
-                    //limpiar el arreglo 
-                    ReiniciarArreglo();
 
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
                         Debug.Log("Es un patronus");
                         
                     }
-                    // idxHechizo = 0;
+
+                    //limpiar el arreglo 
+                    ReiniciarArreglo();
+                    idxHechizo = 0;
                 }else {
                     // Es un hechizo de 3
                     if (sonHechizosIguales(arregloCuadros, patronus)){
                         // Es un expelearmus
                         Debug.Log("Es un adacadra");
-                        // idxHechizo = 0;
+                        idxHechizo = 0;
+                        //limpiar el arreglo 
+                        ReiniciarArreglo();
                     }
                 }
             }
@@ -72,13 +75,13 @@ public class DetectarHechizo : MonoBehaviour
         arregloCuadros = new int[6];
     }
 
-    public bool sonHechizosIguales(int[] expelearmus, int[] arregloCuadros)
+    public bool sonHechizosIguales(int[] arregloCuadros, int[] hechizoComparar)
     {
-        if (arregloCuadros.Length != expelearmus.Length)
+        if (arregloCuadros.Length != hechizoComparar.Length)
             return false;
         for (int i = 0; i < arregloCuadros.Length; i++)
         {
-            if (arregloCuadros[i] != expelearmus[i])
+            if (arregloCuadros[i] != hechizoComparar[i])
                 return false;
         }
         return true;
