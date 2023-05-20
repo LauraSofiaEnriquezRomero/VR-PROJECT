@@ -8,9 +8,10 @@ public class DetectarHechizo : MonoBehaviour
     TCPClient refTCPClient;
     Text refTex;
 
+    PatronusSpell refPatronusSpell;
+
     public int idxHechizo = 0;
     public int[] arregloCuadros = new int[6] {0,0,0,0,0,0};
-    
 
     // Hechizos de 5
     public static int[] expelearmus = new int[6] {0,2,4,3,5,1};
@@ -26,6 +27,7 @@ public class DetectarHechizo : MonoBehaviour
     void Start()
     {
         this.refTCPClient = GameObject.Find("Puntero").GetComponent<TCPClient>();
+        this.refPatronusSpell = GameObject.Find("Patronus").GetComponent<PatronusSpell>();
         this.refTex = this.GetComponent<Text>();
     }
 
@@ -50,12 +52,12 @@ public class DetectarHechizo : MonoBehaviour
                 //Puede ser un hechizo de 3.
                 if (idxHechizo >= 5) {
                     // Es un hechizo de 5 y ya termninamos.
-                    Debug.Log("El arregloCuadros está lleno");
+                    // Debug.Log("El arregloCuadros está lleno");
 
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
                         Debug.Log("Es un patronus");
-                        
+                        this.refPatronusSpell.lanzar = true;
                     }
 
                     //limpiar el arreglo 
