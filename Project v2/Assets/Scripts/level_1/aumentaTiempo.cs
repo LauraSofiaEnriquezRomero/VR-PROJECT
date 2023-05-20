@@ -32,7 +32,7 @@ public class aumentaTiempo : MonoBehaviour
         {
             tiempoRestante = 0f;
 
-            Debug.Log("Tiempo agotado");
+            // Debug.Log("Tiempo agotado");
             times_up.SetActive(true);
         }
 
