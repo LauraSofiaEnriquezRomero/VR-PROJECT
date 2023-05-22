@@ -7,14 +7,17 @@ public class DetectarHechizo : MonoBehaviour
 {
     TCPClient refTCPClient;
     Text refTex;
+
+    PatronusSpell refPatronusSpell;
+
+    public int idxHechizo = 0;
     public int[] arregloCuadros = new int[6] {0,0,0,0,0,0};
-    int idxHechizo = 0;
 
     // Hechizos de 5
-    public static int[] expelearmus = new int[6] {0,2,4,2,5,1};
+    public static int[] expelearmus = new int[6] {0,2,4,3,5,1};
 
     // Hechizos de 3
-    public static int[] adacadabra = new int[6] {0,5,1,2,0,0};
+    public static int[] patronus = new int[6] {0,5,1,2,0,0};
 
 
 
@@ -24,44 +27,50 @@ public class DetectarHechizo : MonoBehaviour
     void Start()
     {
         this.refTCPClient = GameObject.Find("Puntero").GetComponent<TCPClient>();
+        this.refPatronusSpell = GameObject.Find("Patronus").GetComponent<PatronusSpell>();
         this.refTex = this.GetComponent<Text>();
     }
 
     void Update()
-    {   
-        this.refTex.text = "Hechizo:" + this.refTCPClient.cuadro;
+    {
+        this.refTex.text = "Esta en :" + this.refTCPClient.cuadro;
         patronHechizos();
     }
     public void patronHechizos() {
 
         posicionesUnicas.Add(this.refTCPClient.cuadro);
 
+
         // Estamos ignorando un cuadro ya leido y los cuadro 0
         if (arregloCuadros[idxHechizo] != this.refTCPClient.cuadro && this.refTCPClient.cuadro != 0) {
             idxHechizo++;
+
             arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
             
-            if (idxHechizo > 2){
+            if (idxHechizo >= 3){
                 
                 //Puede ser un hechizo de 3.
-                if (idxHechizo > 4) {
+                if (idxHechizo >= 5) {
                     // Es un hechizo de 5 y ya termninamos.
-                    Debug.Log("El arregloCuadros está lleno");
-                    //limpiar el arreglo 
-                    ReiniciarArreglo();
+                    // Debug.Log("El arregloCuadros está lleno");
 
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
-                        Debug.Log("Es un expelearmus");
-                        
+                        Debug.Log("Es un patronus");
+                        this.refPatronusSpell.lanzar = true;
                     }
-                    // idxHechizo = 0;
-                }else {
-                    // Es un hechizo de 3
-                    if (sonHechizosIguales(arregloCuadros, adacadabra)){
+
+                    //limpiar el arreglo 
+                    ReiniciarArreglo();
+                    idxHechizo = 0;
+                } else {
+                    // Es un hechizo de 4
+                    if (sonHechizosIguales(arregloCuadros, patronus)){
                         // Es un expelearmus
-                        Debug.Log("Es un adacadrab");
-                        // idxHechizo = 0;
+                        Debug.Log("Es un patronus");
+                        idxHechizo = 0;
+                        //limpiar el arreglo 
+                        ReiniciarArreglo();
                     }
                 }
             }
@@ -72,13 +81,31 @@ public class DetectarHechizo : MonoBehaviour
         arregloCuadros = new int[6];
     }
 
-    public bool sonHechizosIguales(int[] expelearmus, int[] arregloCuadros)
+    public void imprimirArray(int []arreglo, string nombre = "") {
+        string texto = "[";
+        for (int i = 0; i < arreglo.Length; i++)
+        {
+            if (i==0){
+                texto += arreglo[i];
+            } else {
+                texto +=  "," + arreglo[i];
+            }
+        }
+
+        texto += "]";
+        Debug.Log(nombre + texto);
+    }
+
+    public bool sonHechizosIguales(int[] arregloCuadros, int[] hechizoComparar)
     {
-        if (arregloCuadros.Length != expelearmus.Length)
+        // imprimirArray(arregloCuadros,"arregloCuadros");
+        // imprimirArray(hechizoComparar,"hechizoComparar");
+
+        if (arregloCuadros.Length != hechizoComparar.Length)
             return false;
         for (int i = 0; i < arregloCuadros.Length; i++)
         {
-            if (arregloCuadros[i] != expelearmus[i])
+            if (arregloCuadros[i] != hechizoComparar[i])
                 return false;
         }
         return true;

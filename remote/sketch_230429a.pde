@@ -38,7 +38,8 @@ void setup()
     camara.start();
 
     // Marcadores
-    marcadorA = color(112.0,192.0,117.0); // Color real del marcador A.
+
+    marcadorA = color(75.0,150.0,70.0); // Color real del marcador A.
 }
 
 void draw()
@@ -54,20 +55,37 @@ void draw()
         image(camara, 0, 0);
         camara.loadPixels();
         
+        textSize(64);
+        
+        
         fill(255, 0, 0, 150);
-        rect (0,0,213,160);//ROJO 
+        rect (0,0,213,160);//ROJO
+        fill(255, 255, 255, 220);
+        text("1", 107, 80);
+        
         
         fill(255, 150, 0, 150);
         rect (213,160,213,160);//NARANJA
+        fill(255, 255, 255, 220);
+        text("2", 320, 240);
+        
         
         fill(0, 110, 255, 150);
-        rect (426,320,213,160);//AZUL 
+        rect (426,320,213,160);//AZUL
+        fill(255, 255, 255, 220);
+        text("3", 533, 400);
+        
         
         fill(110, 180, 0, 150);
         rect (0,320,213,160);//VERDE
+        fill(255, 255, 255, 220);
+        text("4", 160, 400);
+        
         
         fill(150, 0, 250, 50);
         rect (426,0,213,160);//MORADO
+        fill(255, 255, 255, 220);
+        text("5", 533, 80);
         
 
         float promedioXMarcadorA = 0;
