@@ -56,8 +56,8 @@ public class DetectarHechizo : MonoBehaviour
 
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
-                        Debug.Log("Es un patronus");
-                        this.refPatronusSpell.lanzar = true;
+                        Debug.Log("Es un expelearmus");
+                        
                     }
 
                     //limpiar el arreglo 
@@ -68,6 +68,7 @@ public class DetectarHechizo : MonoBehaviour
                     if (sonHechizosIguales(arregloCuadros, patronus)){
                         // Es un expelearmus
                         Debug.Log("Es un patronus");
+                        this.refPatronusSpell.lanzar = true;
                         idxHechizo = 0;
                         //limpiar el arreglo 
                         ReiniciarArreglo();

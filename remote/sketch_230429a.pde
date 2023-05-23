@@ -39,7 +39,7 @@ void setup()
 
     // Marcadores
 
-    marcadorA = color(75.0,150.0,70.0); // Color real del marcador A.
+    marcadorA = color(153.0,250.0,178.0); // Color real del marcador A.
 }
 
 void draw()
