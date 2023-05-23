@@ -9,6 +9,9 @@ public class DetectarHechizo : MonoBehaviour
     Text refTex;
 
     PatronusSpell refPatronusSpell;
+    
+    public int contadorMonedas = 10;
+    public Text monedas;
 
     public int idxHechizo = 0;
     public int[] arregloCuadros = new int[6] {0,0,0,0,0,0};
@@ -19,10 +22,10 @@ public class DetectarHechizo : MonoBehaviour
     // Hechizos de 3
     public static int[] patronus = new int[6] {0,5,1,2,0,0};
 
-
-
     //almacena las posiciones unicas
     HashSet<int> posicionesUnicas = new HashSet<int>();
+
+    public aumentaTiempo refAumentaTiempo;
 
     void Start()
     {
@@ -34,6 +37,7 @@ public class DetectarHechizo : MonoBehaviour
     void Update()
     {
         this.refTex.text = "Esta en :" + this.refTCPClient.cuadro;
+        monedas.text = contadorMonedas.ToString();
         patronHechizos();
     }
     public void patronHechizos() {
@@ -57,7 +61,8 @@ public class DetectarHechizo : MonoBehaviour
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
                         Debug.Log("Es un expelearmus");
-                        
+                        contadorMonedas= contadorMonedas+10;
+                        refAumentaTiempo.tiempoRestante += refAumentaTiempo.tiempoAumentado;                   
                     }
 
                     //limpiar el arreglo 
@@ -72,6 +77,7 @@ public class DetectarHechizo : MonoBehaviour
                         idxHechizo = 0;
                         //limpiar el arreglo 
                         ReiniciarArreglo();
+                        contadorMonedas= contadorMonedas+10;
                     }
                 }
             }
@@ -110,6 +116,12 @@ public class DetectarHechizo : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    public void AumentarTiempo(float segundos)
+    {
+        aumentaTiempo refAumentaTiempo = FindObjectOfType<aumentaTiempo>();
+        refAumentaTiempo.tiempoRestante += segundos;
     }
 }
 

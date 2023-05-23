@@ -8,12 +8,15 @@ public class aumentaTiempo : MonoBehaviour
     public float tiempoAumentado = 2f;
     public Text tiempoRestanteText;
 
-    private float tiempoRestante = 30f;
+    public float tiempoRestante = 30f;
 
     public GameObject times_up;
 
+    //DetectarHechizo detectarHechizo;
+
     private void start(){
         times_up.SetActive(false);
+        //detectarHechizo = FindObjectOfType<DetectarHechizo>();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -21,6 +24,7 @@ public class aumentaTiempo : MonoBehaviour
         if (collision.gameObject.CompareTag("Rayo"))
         {
             tiempoRestante += tiempoAumentado;
+            //detectarHechizo.AumentarTiempo(2.0f);
         }
     }
 
@@ -36,7 +40,7 @@ public class aumentaTiempo : MonoBehaviour
             times_up.SetActive(true);
         }
 
-        tiempoRestanteText.text = "Tiempo restante: " + tiempoRestante.ToString("F2");
+        tiempoRestanteText.text = tiempoRestante.ToString("F2");
 
         if (Mathf.FloorToInt(Time.time / 60f) > 0)
         {
@@ -46,5 +50,7 @@ public class aumentaTiempo : MonoBehaviour
 
     }
 
-}         
+
+}
+    
 
