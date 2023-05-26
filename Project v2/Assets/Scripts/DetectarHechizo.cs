@@ -20,12 +20,17 @@ public class DetectarHechizo : MonoBehaviour
     public static int[] expelearmus = new int[6] {0,2,4,3,5,1};
 
     // Hechizos de 3
-    public static int[] patronus = new int[6] {0,5,1,2,0,0};
+    public static int[] patronus = new int[6] {0,5,1,4,0,0};
 
     //almacena las posiciones unicas
     HashSet<int> posicionesUnicas = new HashSet<int>();
 
     public aumentaTiempo refAumentaTiempo;
+
+    //aparecer imagenes random
+    public Transform pos;
+    public GameObject [] instaciarImagenes; 
+
 
     void Start()
     {

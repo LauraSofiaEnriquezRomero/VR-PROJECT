@@ -7,7 +7,7 @@ public class ip : MonoBehaviour
 {
     public Button Button;
     public InputField InputField;
-    private string txtInput;
+    public string ipInput;
 
     
     void Start()
@@ -17,7 +17,7 @@ public class ip : MonoBehaviour
     }
 
 	void TaskOnClick(){
-        txtInput = InputField.text;
-		Debug.Log (txtInput);
+    ipInput = InputField.text;
+		Debug.Log (ipInput);
 	}
 }
