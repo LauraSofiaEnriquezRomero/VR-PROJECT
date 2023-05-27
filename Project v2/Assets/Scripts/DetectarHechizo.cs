@@ -22,21 +22,18 @@ public class DetectarHechizo : MonoBehaviour
     // Hechizos de 3
     public static int[] patronus = new int[6] {0,5,1,4,0,0};
 
-    //almacena las posiciones unicas
+    //almacena posiciones unicas
     HashSet<int> posicionesUnicas = new HashSet<int>();
 
-    public aumentaTiempo refAumentaTiempo;
-
-    //aparecer imagenes random
-    public Transform pos;
-    public GameObject [] instaciarImagenes; 
-
+    //public aumentaTiempo refAumentaTiempo;
 
     void Start()
     {
         this.refTCPClient = GameObject.Find("Puntero").GetComponent<TCPClient>();
         this.refPatronusSpell = GameObject.Find("Patronus").GetComponent<PatronusSpell>();
         this.refTex = this.GetComponent<Text>();
+        //this.refAumentaTiempo = GameObject.FindObjectOfType<aumentaTiempo>();
+
     }
 
     void Update()
@@ -61,18 +58,18 @@ public class DetectarHechizo : MonoBehaviour
                 //Puede ser un hechizo de 3.
                 if (idxHechizo >= 5) {
                     // Es un hechizo de 5 y ya termninamos.
-                    // Debug.Log("El arregloCuadros está lleno");
 
                     if (sonHechizosIguales(arregloCuadros, expelearmus)){
                         // Es un expelearmus
                         Debug.Log("Es un expelearmus");
                         contadorMonedas= contadorMonedas+10;
-                        refAumentaTiempo.tiempoRestante += refAumentaTiempo.tiempoAumentado;                   
+                        //aumenta el tiempo
+                        //refAumentaTiempo.masTiempo(10.0f); // Aumenta el tiempo en 2 segundos
                     }
-
                     //limpiar el arreglo 
                     ReiniciarArreglo();
                     idxHechizo = 0;
+
                 } else {
                     // Es un hechizo de 4
                     if (sonHechizosIguales(arregloCuadros, patronus)){
@@ -123,11 +120,8 @@ public class DetectarHechizo : MonoBehaviour
         return true;
     }
 
-    public void AumentarTiempo(float segundos)
-    {
-        aumentaTiempo refAumentaTiempo = FindObjectOfType<aumentaTiempo>();
-        refAumentaTiempo.tiempoRestante += segundos;
-    }
+
+    
 }
 
 

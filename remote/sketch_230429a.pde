@@ -39,15 +39,12 @@ void setup()
 
     // Marcadores
 
-    marcadorA = color(121.0,175.0,80.0); // Color real del marcador A.
+    marcadorA = color(157.0,255.0,196.0); // Color real del marcador A.
 }
 
 void draw()
 {   
-    //background(255);
-    // Dibuja un círculo en la posición enviada por el celular
-    //ellipse(mouseX, mouseY, 50, 50);
-    
+
     //verifica si la camara esta disponible
     if (camara.available())
     {
