@@ -25,14 +25,17 @@ public class DetectarHechizo : MonoBehaviour
     //almacena posiciones unicas
     HashSet<int> posicionesUnicas = new HashSet<int>();
 
-    //public aumentaTiempo refAumentaTiempo;
+    public aumentaTiempo cronometroMasDos;
+
+    public destelloCod patronDestello;
 
     void Start()
     {
         this.refTCPClient = GameObject.Find("Puntero").GetComponent<TCPClient>();
         this.refPatronusSpell = GameObject.Find("Patronus").GetComponent<PatronusSpell>();
         this.refTex = this.GetComponent<Text>();
-        //this.refAumentaTiempo = GameObject.FindObjectOfType<aumentaTiempo>();
+        cronometroMasDos = GameObject.FindObjectOfType<aumentaTiempo>();
+        patronDestello = GameObject.FindObjectOfType<destelloCod>();
 
     }
 
@@ -50,6 +53,7 @@ public class DetectarHechizo : MonoBehaviour
         // Estamos ignorando un cuadro ya leido y los cuadro 0
         if (arregloCuadros[idxHechizo] != this.refTCPClient.cuadro && this.refTCPClient.cuadro != 0) {
             idxHechizo++;
+            patronDestello.cambioDestellos (idxHechizo);
 
             arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
             
@@ -64,7 +68,7 @@ public class DetectarHechizo : MonoBehaviour
                         Debug.Log("Es un expelearmus");
                         contadorMonedas= contadorMonedas+10;
                         //aumenta el tiempo
-                        //refAumentaTiempo.masTiempo(10.0f); // Aumenta el tiempo en 2 segundos
+                        cronometroMasDos.masTiempo(10.0f); // Aumenta el tiempo en 2 segundos
                     }
                     //limpiar el arreglo 
                     ReiniciarArreglo();
