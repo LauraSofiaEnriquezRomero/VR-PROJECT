@@ -34,6 +34,7 @@ public class aumentaTiempo : MonoBehaviour
         if (tiempoRestante <= 0f)
         {
             tiempoRestante = 0f;
+            Time.timeScale = 0;
             times_up.SetActive(true);
         }
 

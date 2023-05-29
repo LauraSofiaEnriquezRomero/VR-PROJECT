@@ -7,11 +7,12 @@ public class DetectarHechizo : MonoBehaviour
 {
     TCPClient refTCPClient;
     Text refTex;
-
     Spell refSpell;
     
     public int contadorMonedas = 10;
     public Text monedas;
+    public int totalMonedasContador;
+    public Text totalMonedas;
 
     public int idxHechizo = 0;
     public int[] arregloCuadros = new int[6] {0,0,0,0,0,0};
@@ -36,6 +37,8 @@ public class DetectarHechizo : MonoBehaviour
 
     public destelloCod patronDestello;
 
+
+
     void Start()
     {
         this.refTCPClient = GameObject.Find("Puntero").GetComponent<TCPClient>();
@@ -43,23 +46,27 @@ public class DetectarHechizo : MonoBehaviour
         this.refTex = this.GetComponent<Text>();
         cronometroMasDos = GameObject.FindObjectOfType<aumentaTiempo>();
         patronDestello = GameObject.FindObjectOfType<destelloCod>();
+        //this.totalMonedas = this.GetComponent<Text>();
 
     }
 
     void Update()
     {
-        this.refTex.text = "Esta en :" + this.refTCPClient.cuadro;
+        this.refTex.text = "" + this.refTCPClient.cuadro;
         monedas.text = contadorMonedas.ToString();
+        totalMonedasContador = contadorMonedas;
+        totalMonedas.text = "Knuts recolectados: " + totalMonedasContador.ToString();
         patronHechizos();
     }
     public void patronHechizos() {
 
         posicionesUnicas.Add(this.refTCPClient.cuadro);
 
-
         // Estamos ignorando un cuadro ya leido y los cuadro 0
         if (arregloCuadros[idxHechizo] != this.refTCPClient.cuadro && this.refTCPClient.cuadro != 0) {
             idxHechizo++;
+//            totalMonedas.Text = totalMonedasContador.ToString();
+
             patronDestello.cambioDestellos (idxHechizo);
 
             arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
