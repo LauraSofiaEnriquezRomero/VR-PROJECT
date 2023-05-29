@@ -9,6 +9,7 @@ public class SceneManager : MonoBehaviour
     {
         Debug.Log("va cambiando");
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
+        Time.timeScale = 1;
     }
 }
 
