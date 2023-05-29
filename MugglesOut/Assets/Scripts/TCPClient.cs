@@ -16,7 +16,7 @@ public class TCPClient : MonoBehaviour {
     NetworkStream theStream;
     StreamReader theReader;
     //String Host = "11.11.19.43";
-    String Host = "localhost";
+    String Host = "172.19.208.1";
     Int32 Port = 80;
 
     public int tcpX = 0;
