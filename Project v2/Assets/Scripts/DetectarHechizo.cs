@@ -8,7 +8,7 @@ public class DetectarHechizo : MonoBehaviour
     TCPClient refTCPClient;
     Text refTex;
 
-    PatronusSpell refPatronusSpell;
+    Spell refSpell;
     
     public int contadorMonedas = 10;
     public Text monedas;
@@ -18,9 +18,16 @@ public class DetectarHechizo : MonoBehaviour
 
     // Hechizos de 5
     public static int[] expelearmus = new int[6] {0,2,4,3,5,1};
+    
+    // Hechizos de 4
+    public static int[] wingardium = new int[6] {0,3,2,1,4,0};
 
     // Hechizos de 3
     public static int[] patronus = new int[6] {0,5,1,4,0,0};
+    public static int[] lumos = new int[6] {0,3,2,4,0,0};
+
+    // Hechizos de 2
+    public static int[] impedimenta = new int[6] {0,3,4,0,0,0};
 
     //almacena posiciones unicas
     HashSet<int> posicionesUnicas = new HashSet<int>();
@@ -32,7 +39,7 @@ public class DetectarHechizo : MonoBehaviour
     void Start()
     {
         this.refTCPClient = GameObject.Find("Puntero").GetComponent<TCPClient>();
-        this.refPatronusSpell = GameObject.Find("Patronus").GetComponent<PatronusSpell>();
+        this.refSpell = GameObject.Find("launchSparkles").GetComponent<Spell>();
         this.refTex = this.GetComponent<Text>();
         cronometroMasDos = GameObject.FindObjectOfType<aumentaTiempo>();
         patronDestello = GameObject.FindObjectOfType<destelloCod>();
@@ -57,36 +64,69 @@ public class DetectarHechizo : MonoBehaviour
 
             arregloCuadros[idxHechizo] = this.refTCPClient.cuadro;
             
-            if (idxHechizo >= 3){
-                
-                //Puede ser un hechizo de 3.
-                if (idxHechizo >= 5) {
-                    // Es un hechizo de 5 y ya termninamos.
+            if (idxHechizo >= 2){
 
-                    if (sonHechizosIguales(arregloCuadros, expelearmus)){
-                        // Es un expelearmus
-                        Debug.Log("Es un expelearmus");
-                        contadorMonedas= contadorMonedas+10;
-                        //aumenta el tiempo
-                        cronometroMasDos.masTiempo(10.0f); // Aumenta el tiempo en 2 segundos
-                    }
-                    //limpiar el arreglo 
-                    ReiniciarArreglo();
-                    idxHechizo = 0;
+                if (idxHechizo >= 3){
+
+                    if (idxHechizo >= 4){
+                        //Puede ser un hechizo de 3.
+                        if (idxHechizo >= 5) {
+                            
+                            // Es un hechizo de 5 y ya termninamos.
+                            if (sonHechizosIguales(arregloCuadros, expelearmus)){
+                                // Es un expelearmus
+                                Debug.Log("Es un expelearmus");
+                                this.refSpell.lanzar = true;
+                                contadorMonedas= contadorMonedas+10;
+                                //aumenta el tiempo
+                                cronometroMasDos.masTiempo(5.0f); // Aumenta el tiempo en 2 segundos
+                            }
+                            //limpiar el arreglo 
+                            ReiniciarArreglo();
+                            idxHechizo = 0;
+
+                        } else {
+
+                            if (sonHechizosIguales(arregloCuadros, wingardium)){
+                            // Es un wingardium
+                            Debug.Log("Es un wingardium");
+                            this.refSpell.lanzar = true;
+                            contadorMonedas = contadorMonedas + 10;
+                            // aumenta el tiempo
+                            cronometroMasDos.masTiempo(5.0f); // Aumenta el tiempo en 2 segundos
+                            ReiniciarArreglo();
+                            idxHechizo = 0;
+                            }
+                         }
+                    } else {
+                        // Es un hechizo de 4
+                        if (sonHechizosIguales(arregloCuadros, patronus) || sonHechizosIguales(arregloCuadros, lumos)){
+                            // Es un expelearmus
+                            Debug.Log("Es un patronus o lumos");
+                            this.refSpell.lanzar = true;
+                            idxHechizo = 0;
+                            cronometroMasDos.masTiempo(5.0f); // Aumenta el tiempo en 2 segundos
+                            //limpiar el arreglo 
+                            ReiniciarArreglo();
+                            contadorMonedas= contadorMonedas+10;
+                        }
+                    }                
 
                 } else {
-                    // Es un hechizo de 4
-                    if (sonHechizosIguales(arregloCuadros, patronus)){
+                // Es un hechizo de 4
+                    if (sonHechizosIguales(arregloCuadros, impedimenta)){
                         // Es un expelearmus
-                        Debug.Log("Es un patronus");
-                        this.refPatronusSpell.lanzar = true;
+                        Debug.Log("Es un impedimenta");
+                        this.refSpell.lanzar = true;
                         idxHechizo = 0;
+                        cronometroMasDos.masTiempo(5.0f); // Aumenta el tiempo en 2 segundos
                         //limpiar el arreglo 
                         ReiniciarArreglo();
                         contadorMonedas= contadorMonedas+10;
                     }
                 }
-            }
+            }  
+
         }
     }
     private void ReiniciarArreglo(){
